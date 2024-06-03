@@ -46,30 +46,31 @@ jobs:
     - name: Build
       run: dotnet build --no-restore --configuration Release
 
-    # - name: Test
-    #   run: dotnet test --no-build --no-restore --configuration Release
+    - name: Test
+      run: dotnet test --no-build --no-restore --configuration Release
 
     - name: SonarCloud Scan
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-        SONAR_PROJECT_KEY: "DD_BusinessCatalogueService"
+        SONAR_PROJECT_KEY: "RM-DienstDuizend_DienstDuizend.AuthenticationService"
       run: |
         dotnet tool install --global dotnet-sonarscanner
         export PATH="$PATH:/home/runner/.dotnet/tools"
-        dotnet sonarscanner begin /k:"${SONAR_PROJECT_KEY}" /d:sonar.host.url="${SONAR_HOST_URL}" /d:sonar.login="${SONAR_TOKEN}"
+        dotnet sonarscanner begin /k:"${SONAR_PROJECT_KEY}" /o:"rm-dienstduizend" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.login="${SONAR_TOKEN}"
         dotnet build --no-restore --configuration Release
         dotnet sonarscanner end /d:sonar.login="${SONAR_TOKEN}"
 
     - name: Run Trivy vulnerability scan
       uses: aquasecurity/trivy-action@master
       with:
-        scan-type: 'fs'
+        scan-type: 'fs'  
 
     - name: Run Snyk to check for vulnerabilities
       uses: snyk/actions/dotnet@master
       env:
-        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}        
+        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      with:
+          args: --all-projects --exclude=tests # Important do not remove, since our unusual project structure apparently
 
     - name: 'Docker Login'
       uses: azure/docker-login@v1
