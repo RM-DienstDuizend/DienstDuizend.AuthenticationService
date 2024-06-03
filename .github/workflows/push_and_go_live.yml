@@ -16,8 +16,8 @@ jobs:
         shell: bash
 
     env:
-      DIRECTORY_NAME: DienstDuizend.BusinessCatalogueService
-      IMAGE_NAME: business-catalogue-service
+      DIRECTORY_NAME: DienstDuizend.AuthenticationService
+      IMAGE_NAME: authentication-service
       
     steps:
     - uses: actions/checkout@v4
