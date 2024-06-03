@@ -47,9 +47,9 @@ namespace DienstDuizend.AuthService.IntegrationTesting.Setup
             {
                 config.AddInMemoryCollection(new Dictionary<string, string>()
                 {
-                    { "JwtAuthSettings:AccessTokenSecret", "ACCESS_TOKEN_SECRET" },
+                    { "JwtAuthSettings:AccessTokenSecret", "pxY84L#3X7h3#AaU&MogX&KWokqp^&ao" },
                     { "JwtAuthSettings:AccessTokenExpirationTimeInMinutes", "5" },
-                    { "JwtAuthSettings:RefreshTokenSecret", "REFRESH_TOKEN_SECRET" },
+                    { "JwtAuthSettings:RefreshTokenSecret", "CMhC$7Ag7Ec!Bnv%dpE2Q6gwbM249^cQ" },
                     { "JwtAuthSettings:RefreshTokenExpirationTimeInMinutes", "15" },
                     { "LockoutSettings:LockoutKeyLength", "32" },
                     { "LockoutSettings:MaxAttempts", "3" }
