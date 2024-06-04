@@ -36,7 +36,7 @@ public class JwtAuthTokenService(IOptions<JwtAuthSettings> jwtSettings) : IJwtAu
             .ValidateToken(refreshToken, new TokenValidationParameters
             {
                 ValidateIssuerSigningKey = true,
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_jwtSettings.RefreshTokenSecret)),
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.RefreshTokenSecret)),
                 ValidateIssuer = false,
                 ValidateAudience = false,
                 // set clockskew to zero so tokens expire exactly at token expiration time (instead of 5 minutes later)
@@ -61,10 +61,10 @@ public class JwtAuthTokenService(IOptions<JwtAuthSettings> jwtSettings) : IJwtAu
             Subject = new ClaimsIdentity(claims),
             Expires = dateTime,
             SigningCredentials = new SigningCredentials(
-                new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secret))
+                new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret))
                 , SecurityAlgorithms.HmacSha256Signature)
         };
         var token = _jwtSecurityTokenHandler.CreateToken(tokenDescriptor);
-        return _jwtSecurityTokenHandler.WriteToken(token);
+        return  _jwtSecurityTokenHandler.WriteToken(token);
     }
 }
