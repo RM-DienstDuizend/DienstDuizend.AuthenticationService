@@ -78,9 +78,6 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-
-Console.WriteLine($"The current access secret is '{builder.Configuration.GetValue<string>("JwtAuthSettings:AccessTokenSecret")}'");
-
 app.Run();
 
 public partial class Program;
