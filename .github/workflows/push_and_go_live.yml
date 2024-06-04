@@ -71,6 +71,7 @@ jobs:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       with:
           args: --all-projects --exclude=tests # Important do not remove, since our unusual project structure apparently
+          command: monitor
 
     - name: 'Docker Login'
       uses: azure/docker-login@v1
