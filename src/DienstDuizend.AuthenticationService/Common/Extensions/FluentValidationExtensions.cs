@@ -16,7 +16,8 @@ public static class FluentValidationExtensions
     public static IRuleBuilderOptions<T, string> RequiredUniqueChars<T>(this IRuleBuilder<T, string> ruleBuilder, int count)
     {
         return ruleBuilder
-            .Must(v => v.Distinct().Count() > count);
+	        .Must(v => v.Distinct().Count() >= count)
+	        .WithMessage($"Your password needs to contain at least {count} unique characters.");
     }
 
 	public static IRuleBuilderOptions<T, string> IsContainedIn<T>(this IRuleBuilder<T, string> ruleBuilder, IEnumerable<string> source)

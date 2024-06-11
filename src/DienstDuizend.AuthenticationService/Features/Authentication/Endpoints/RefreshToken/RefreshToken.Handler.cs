@@ -14,7 +14,7 @@ namespace DienstDuizend.AuthenticationService.Features.Authentication.Endpoints.
 [Handler]
 public static partial class RefreshToken
 {
-    public record Command();
+    public record Command;
 
     public record Response(string AccessToken);
 

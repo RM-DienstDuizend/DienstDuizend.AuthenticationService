@@ -24,7 +24,6 @@ public class RegisterValidator : AbstractValidator<Register.Command>
         
         RuleFor(user => user.Password)
             .RequiredUniqueChars(6)
-            .WithMessage("Your password needs to contain at least 6 unique characters.")
             .NotEqual(user => user.Email.ToString())
             .WithMessage("Your password and email cannot be the same value.")
             .Equal(user => user.ConfirmPassword)

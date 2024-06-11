@@ -59,7 +59,7 @@ public class RegisterTests : IntegrationTest
     }
     
     [Fact]
-    public async Task Register_ReturnsBadRequest_WhenTermsOfServiceAcceptedIsFalse()
+    public async Task Register_ReturnsException_WhenTermsOfServiceAcceptedIsFalse()
     {
         // Arrange
         var newUser = new Register.Command(
@@ -70,14 +70,6 @@ public class RegisterTests : IntegrationTest
             "Password123!",
             false
         );
-
-        Db.Users.Add(new User()
-        {
-            Email = newUser.Email,
-            HashedPassword = newUser.Password
-        });
-
-        await Db.SaveChangesAsync();
 
         // Act
         Func<Task> act = async () => await _handler.HandleAsync(newUser);

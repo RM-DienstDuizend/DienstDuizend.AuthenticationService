@@ -54,7 +54,7 @@ public static partial class Login
                 });
             }
 
-            await dbContext.SaveChangesAsync();
+            await dbContext.SaveChangesAsync(token);
 
             throw Error.Failure("User.InvalidCredentials", "The given email/password is invalid.");
         }
