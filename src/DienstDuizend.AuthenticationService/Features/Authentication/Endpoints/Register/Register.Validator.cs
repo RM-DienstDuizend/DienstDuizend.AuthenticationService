@@ -23,7 +23,7 @@ public class RegisterValidator : AbstractValidator<Register.Command>
         
         
         RuleFor(user => user.Password)
-            .RequiredUniqueChars(6)
+            .MaxDuplicateChars(6)
             .NotEqual(user => user.Email.ToString())
             .WithMessage("Your password and email cannot be the same value.")
             .Equal(user => user.ConfirmPassword)
