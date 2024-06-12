@@ -29,6 +29,7 @@ public static class DependencyInjection
         services.AddOpenTelemetry()
             .WithMetrics(builder => builder
                 // Metrics provider from OpenTelemetry
+                .AddRuntimeInstrumentation()
                 .AddAspNetCoreInstrumentation()
                 // Metrics provides by ASP.NET Core in .NET 8
                 .AddMeter("Microsoft.AspNetCore.Hosting")
