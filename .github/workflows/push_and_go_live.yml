@@ -47,7 +47,10 @@ jobs:
       run: dotnet build --no-restore --configuration Release
 
     - name: Unit Testing
-      run: dotnet test ./test/${{ env.DIRECTORY_NAME }}.UnitTesting/${{ env.DIRECTORY_NAME }}.UnitTesting.csproj --no-build --no-restore --configuration Release 
+      run: dotnet test ./tests/${{ env.DIRECTORY_NAME }}.UnitTesting/${{ env.DIRECTORY_NAME }}.UnitTesting.csproj --no-build --no-restore --configuration Release 
+
+    - name: Integration Testing
+      run: dotnet test ./tests/${{ env.DIRECTORY_NAME }}.IntegrationTesting/${{ env.DIRECTORY_NAME }}.IntegrationTesting.csproj --no-build --no-restore --configuration Release 
 
     - name: SonarCloud Scan
       env:
