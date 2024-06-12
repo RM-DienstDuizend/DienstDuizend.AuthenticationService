@@ -9,7 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{21C89A08
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DienstDuizend.AuthenticationService.IntegrationTests", "tests\DienstDuizend.AuthenticationService.IntegrationTests\DienstDuizend.AuthenticationService.IntegrationTests.csproj", "{07A76FBE-083C-49AA-856E-0C1B95DEB7B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DienstDuizend.AuthenticationService.UnitTesting", "tests\DienstDuizend.AuthenticationService.UnitTesting\DienstDuizend.AuthenticationService.UnitTesting.csproj", "{CC8C1CD8-D67E-4938-9228-70CC7CD77F92}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DienstDuizend.AuthenticationService.UnitTests", "tests\DienstDuizend.AuthenticationService.UnitTests\DienstDuizend.AuthenticationService.UnitTests.csproj", "{CC8C1CD8-D67E-4938-9228-70CC7CD77F92}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
