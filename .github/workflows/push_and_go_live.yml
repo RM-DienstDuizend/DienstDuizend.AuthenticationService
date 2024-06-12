@@ -43,11 +43,11 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
 
-    - name: Build
-      run: dotnet build --no-restore --configuration Release
+    # - name: Build
+    #   run: dotnet build --no-restore --configuration Release
 
-    - name: Test
-      run: dotnet test --no-build --no-restore --configuration Release
+    # - name: Test
+    #   run: dotnet test --no-build --no-restore --configuration Release
 
     - name: SonarCloud Scan
       env:
@@ -58,6 +58,7 @@ jobs:
         export PATH="$PATH:/home/runner/.dotnet/tools"
         dotnet sonarscanner begin /k:"${SONAR_PROJECT_KEY}" /o:"rm-dienstduizend" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.login="${SONAR_TOKEN}"
         dotnet build --no-restore --configuration Release
+        dotnet test --no-build --no-restore --configuration Release --collect "Code Coverage"
         dotnet sonarscanner end /d:sonar.login="${SONAR_TOKEN}"
 
     - name: Run Trivy vulnerability scan
