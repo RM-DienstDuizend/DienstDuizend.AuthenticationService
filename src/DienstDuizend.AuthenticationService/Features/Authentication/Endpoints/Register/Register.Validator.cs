@@ -18,7 +18,7 @@ public class RegisterValidator : AbstractValidator<Register.Command>
             .Matches(@"[A-Z]+").WithMessage("Your password must contain at least one uppercase letter.")
             .Matches(@"[a-z]+").WithMessage("Your password must contain at least one lowercase letter.")
             .Matches(@"[0-9]+").WithMessage("Your password must contain at least one number.")
-            .Matches(@"[\!\?\*\.]+").WithMessage("Your password must contain at least one (!? *.).");
+            .Matches(@"[\!\?\@\$]+").WithMessage("Your password must contain at least one (!?@$).");
             //.IsNotContainedIn(CommonPasswordList.Values).WithMessage("Your password is too commonly used, please try something else.");
         
         

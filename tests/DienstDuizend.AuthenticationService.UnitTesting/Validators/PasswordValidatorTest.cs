@@ -20,7 +20,7 @@ namespace DienstDuizend.AuthenticationService.UnitTesting.Validators
         [InlineData("nouppercase123!", "Your password must contain at least one uppercase letter.")]
         [InlineData("NOLOWERCASE123!", "Your password must contain at least one lowercase letter.")]
         [InlineData("NoNumbers!", "Your password must contain at least one number.")]
-        [InlineData("NoSpecialChars123", "Your password must contain at least one (!? *.).")]
+        [InlineData("NoSpecialChars123", "Your password must contain at least one (!?@$).")]
         public void Should_Have_Validation_Error_For_Invalid_Passwords(string password, string expectedErrorMessage)
         {
             var command = new Register.Command(
