@@ -16,7 +16,7 @@ namespace DienstDuizend.AuthenticationService.UnitTesting.Validators
         [Theory]
         [InlineData("", "Your password cannot be empty.")]
         [InlineData("short", "Your password length must be at least 12 characters.")]
-        [InlineData("S3cur3Pa$$w0rd-F0r-Dummy-Syst3m_Th@t-1s-N3v3r-Us3d!!", "Your password length must not exceed 128 characters.")]
+        [InlineData("nMDFE5xNVRz7fsZkplgY?yi1!SJjtKwad4vT@CB$2er9LhUHb6Ef9GCHarD6BlQj0ZvM$Un1SXWzJuPTdgmKAx@e?iNI!243h7ORn5FtNlVLbr4Y$ywZK8hU?W1DSxvAJm9q3soMgkEPXIi@a70H!c", "Your password length must not exceed 128 characters.")]
         [InlineData("nouppercase123!", "Your password must contain at least one uppercase letter.")]
         [InlineData("NOLOWERCASE123!", "Your password must contain at least one lowercase letter.")]
         [InlineData("NoNumbers!", "Your password must contain at least one number.")]
@@ -34,12 +34,6 @@ namespace DienstDuizend.AuthenticationService.UnitTesting.Validators
 
             result.ShouldHaveValidationErrorFor(x => x.Password)
                 .WithErrorMessage(expectedErrorMessage);
-        }
-
-        [Fact]
-        public void FailFast()
-        {
-            true.Should().BeFalse();
         }
 
         [Fact]
