@@ -43,11 +43,11 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
 
-    # - name: Build
-    #   run: dotnet build --no-restore --configuration Release
+    - name: Build
+      run: dotnet build --no-restore --configuration Release
 
-    # - name: Test
-    #   run: dotnet test --no-build --no-restore --configuration Release
+    - name: Test
+      run: dotnet test --no-build --no-restore --configuration Release
 
     - name: SonarCloud Scan
       env:
