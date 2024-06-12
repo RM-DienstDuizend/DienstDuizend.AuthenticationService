@@ -28,8 +28,12 @@ public static class DependencyInjection
 
         services.AddOpenTelemetry()
             .WithMetrics(builder => builder
-                .AddPrometheusExporter()
-                .AddAspNetCoreInstrumentation()); // We use v1.7 because currently v1.8 has an issue with formatting.
+                // Metrics provider from OpenTelemetry
+                .AddAspNetCoreInstrumentation()
+                // Metrics provides by ASP.NET Core in .NET 8
+                .AddMeter("Microsoft.AspNetCore.Hosting")
+                .AddMeter("Microsoft.AspNetCore.Server.Kestrel")
+                .AddPrometheusExporter()); // We use v1.7 because currently v1.8 has an issue with formatting.
 
 
         services.AddMassTransit(busConfigurator =>
