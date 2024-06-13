@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DienstDuizend.AuthenticationService.Features.Authentication.Endpoints.TwoFactor.Recover;
 
-[ApiController, Route("/2fa/recover")]
+[ApiController, Route("/2fa/recover"), Authorize]
 public class RecoverTwoFactorEndpoint(TwoFactorRecover.Handler handler) : ControllerBase
 {
     [HttpPost]
