@@ -60,15 +60,28 @@ public static partial class Login
         }
 
         if (user.IsPermanentlyBlocked || user.LockoutRemovalKey is not null)
+        {
+            user.FailedAttempts += 1;
+            await dbContext.SaveChangesAsync(token);
             throw Error.Forbidden("User.Blocked", "The given user has been (temporarily) blocked.");
+        }
 
         if (user.TwoFactorKey is not null)
         {
             if (request.OneTimePassword is null)
+            {
+                user.FailedAttempts += 1;
+                await dbContext.SaveChangesAsync(token);
                 throw Error.Failure("User.IncorrectCredentials", "Please provide a valid OTP code.");
+            }
 
             if (!tfa.ValidateTwoFactorPIN(user.TwoFactorKey, request.OneTimePassword))
+            {
+                user.FailedAttempts += 1;
+                await dbContext.SaveChangesAsync(token);
                 throw Error.Failure("User.IncorrectOTP", "The given OTP code is invalid");
+            }
+                
         }
 
         user.FailedAttempts = 0;

@@ -230,12 +230,12 @@ public class LoginTests : IntegrationTest
     }
 
     [Fact]
-    public async Task Login_ThrowsInvalidCredentialsException_WhenFailedAttemptsExceedMaxAttempts()
+    public async Task Login_ThrowsUserBlockedException_WhenFailedAttemptsExceedMaxAttempts()
     {
         // Arrange
         var credentials = new Login.Command(
             Email.From("johndoe@mail.net"),
-            "WrongPassword"
+            "Password123!"
         );
 
         var userId = Guid.NewGuid();
@@ -245,7 +245,8 @@ public class LoginTests : IntegrationTest
             Id = userId,
             Email = credentials.Email,
             HashedPassword = Argon2.Hash("Password123!"),
-            FailedAttempts = 2
+            FailedAttempts = 3,
+            LockoutRemovalKey = "ABC"
         };
 
         Db.Users.Add(user);
@@ -256,11 +257,11 @@ public class LoginTests : IntegrationTest
 
         // Assert
         var error = await act.Should().ThrowAsync<ApplicationException>();
-        error.And.ErrorCode.Should().Contain("User.InvalidCredentials");
+        error.And.ErrorCode.Should().Contain("User.Blocked");
 
         var updatedUser = await Db.Users.FirstOrDefaultAsync(u => u.Id == userId);
         updatedUser.Should().NotBeNull();
-        updatedUser.FailedAttempts.Should().Be(3);
+        updatedUser.FailedAttempts.Should().Be(4);
         updatedUser.LockoutRemovalKey.Should().NotBeNull();
     }
 }
